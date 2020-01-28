@@ -58,7 +58,6 @@ if __name__ == '__main__':
     table = PyTex()
     array = np.array([[1, 1], [1, 1], [1, 1], [1, 1]])
     array_1 = [[1, 1], [1, 1], [1, 1], [1, 1]]
-    print(table.csv_to_tex(r'C:\Users\chenh\Desktop\Location_detector\trail_data.csv', True))
     # for style in ['p', 'b', 'V', 'v']:
     #     print(table.make_matrix(array_1, style=style))
 
