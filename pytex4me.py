@@ -32,7 +32,7 @@ class PyTex:
             if hline:
                 tex_code += "\t\\hline\n"
         tex_code += "\t\\end{tabular}\n\\end{table}"
-        return tex_code
+        print(tex_code)
 
     @staticmethod
     def csv_to_tex(file_dir, hline=True):
@@ -51,7 +51,7 @@ class PyTex:
             else:
                 tex_code += str(column[len(column) - 1]) + '\\\\\n'
         tex_code += "\t\\end{tabular}\n\\end{table}"
-        return tex_code
+        print(tex_code)
 
     def matrix_to_tex(self, mat, style='b'):
         if style not in ['p', 'b', 'V', 'v']:
@@ -66,7 +66,7 @@ class PyTex:
                     tex_code = tex_code[:-2]
                     tex_code = tex_code + '\\\\\n'
                 tex_code += "\\end{}\n".format('{' + style + 'matrix}')
-                return tex_code.rstrip()
+                print(tex_code)
             else:
                 try:
                     np_mat = np.array(mat)
