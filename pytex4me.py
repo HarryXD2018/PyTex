@@ -42,14 +42,14 @@ class PyTex:
         tex_code = "\\begin{}[htbp]\n" \
                    "\t\\centering\n" \
                    "\t\\begin{}{}\n".format('{table}', '{tabular}', '{'+'c' * item_len+'}')
-        for column in data_item:
+        for row in data_item:
             tex_code += '\t'
-            for index in range(0, len(column) - 1):
-                tex_code = tex_code + str(column[index]) + '& '
+            line = "& "
+            tex_code += line.join(row)
             if hline:
-                tex_code += str(column[len(column) - 1]) + '\\\\\n\t\\hline\n'
+                tex_code += '\\\\\n\t\\hline\n'
             else:
-                tex_code += str(column[len(column) - 1]) + '\\\\\n'
+                tex_code += '\\\\\n'
         tex_code += "\t\\end{tabular}\n\\end{table}"
         print(tex_code)
 
@@ -59,9 +59,9 @@ class PyTex:
         else:
             tex_code = "\\begin{}\n".format('{' + style + 'matrix}')
             if isinstance(mat, np.ndarray) and mat.ndim == 2:
-                for column in mat:
+                for row in mat:
                     tex_code += '\t'
-                    for item in column:
+                    for item in row:
                         tex_code = tex_code + str(item) + '& '
                     tex_code = tex_code[:-2]
                     tex_code = tex_code + '\\\\\n'
