@@ -30,7 +30,7 @@ class PyTex:
         tex_code += "\t\\end{tabular}\n\\end{table}"
         return tex_code
 
-    def make_matrix(self, mat, style='b'):
+    def matrix_to_tex(self, mat, style='b'):
         if style not in ['p', 'b', 'V', 'v']:
             err = "Style Invalid"
             raise PyTexError(err)
@@ -48,16 +48,9 @@ class PyTex:
             else:
                 try:
                     np_mat = np.array(mat)
-                    return self.make_matrix(np_mat, style=style)
+                    return self.matrix_to_tex(np_mat, style=style)
                 except TypeError as e:
                     err = "Format not Matrix"
                     raise PyTexError(err)
 
-
-if __name__ == '__main__':
-    table = PyTex()
-    array = np.array([[1, 1], [1, 1], [1, 1], [1, 1]])
-    array_1 = [[1, 1], [1, 1], [1, 1], [1, 1]]
-    # for style in ['p', 'b', 'V', 'v']:
-    #     print(table.make_matrix(array_1, style=style))
 
