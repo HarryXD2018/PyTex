@@ -24,9 +24,9 @@ class PyTex:
             tex_code += '\t'
             for index in range(0, max_row_len):
                 try:
-                    tex_code += "{} &".format(str(row[index]))
+                    tex_code += "{}& ".format(str(row[index]))
                 except IndexError:
-                    tex_code += " &"
+                    tex_code += "& "
             tex_code = tex_code[:-2]
             tex_code += "\\\\\n"
             if hline:
@@ -44,8 +44,11 @@ class PyTex:
                    "\t\\begin{}{}\n".format('{table}', '{tabular}', '{'+'c' * item_len+'}')
         for row in data_item:
             tex_code += '\t'
-            line = "& "
-            tex_code += line.join(row)
+            # for index in range(0, len(row) - 1):
+            #     tex_code += str(row[index])
+            #     tex_code += '& '
+            # tex_code += str(row[len(row) - 1])
+            tex_code += "& ".join(row)
             if hline:
                 tex_code += '\\\\\n\t\\hline\n'
             else:
