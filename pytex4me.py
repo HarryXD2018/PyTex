@@ -11,17 +11,16 @@ class PyTex:
     def __init__(self):
         pass
 
-    def check_table_style(self, table_style:str, item_len):
+    def check_table_style(self, table_style: str, item_len):
         if table_style is None:
             return False
-        return table_style.count("c") + table_style.count("|") == len(table_style) \
-               and item_len == table_style.count("c")
+        return table_style.count("c") + table_style.count("|") == len(table_style)and item_len == table_style.count("c")
 
     @staticmethod
     def make_table_by_column(*column, hline=True):
         pass
 
-    def make_table_by_row(self, *rows, hline=True, vline=True, table_style=None):
+    def make_table_by_row(self, *rows, caption=None, hline=True, vline=True, table_style=None):
         max_row_len = 0
         for row in rows:
             if len(row) > max_row_len:
@@ -45,10 +44,13 @@ class PyTex:
             tex_code += "\\\\\n"
             if hline:
                 tex_code += "\t\\hline\n"
-        tex_code += "\t\\end{tabular}\n\\end{table}"
+        if caption is None:
+            tex_code += "\t\\end{tabular}\n\t%\\caption{}\n\\end{table}"
+        else:
+            tex_code += "\t\\end{}\n\t\\caption{}\n\\end{}".format("{tabular}", "{" + caption + "}", "{table}")
         print(tex_code)
 
-    def csv_to_tex(self, file_dir, hline=True, vline=True, table_style=None):
+    def csv_to_tex(self, file_dir, caption=None, hline=True, vline=True, table_style=None):
         csv_file = csv.reader(open(file_dir, 'r', encoding='UTF8'))
         data_item = [row for row in csv_file]
         item_len = len(data_item[0])
@@ -67,7 +69,10 @@ class PyTex:
                 tex_code += '\\\\\n\t\\hline\n'
             else:
                 tex_code += '\\\\\n'
-        tex_code += "\t\\end{tabular}\n\\end{table}"
+        if caption is None:
+            tex_code += "\t\\end{tabular}\n\t\\%caption{}\n\\end{table}"
+        else:
+            tex_code += "\t\\end{tabular}\n" + "\t\\%caption{}\n".format("{" + caption + "}") + "\\end{table}"
         print(tex_code)
 
     def matrix_to_tex(self, mat, style='b'):
