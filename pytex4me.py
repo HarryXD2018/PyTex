@@ -114,7 +114,7 @@ class PyTex:
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('file_dir', type=str, help='display an integer')
+    parser.add_argument('file_dir', type=str)
     args = parser.parse_args()
     print(args.file_dir)
     args.file_dir: str
