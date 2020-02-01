@@ -8,4 +8,4 @@ if __name__ == '__main__':
 
     matrix = [[0, 1], [1, 0]]
     tex.matrix_to_tex(matrix, 'p')
-    tex.csv_to_tex('example.csv')
+    tex.csv_to_tex('example.csv', table_style='c|cccc')

@@ -11,6 +11,14 @@ class PyTex:
     def __init__(self):
         pass
 
+    def check_table_style(self, table_style:str, item_len):
+        return table_style.count("c") + table_style.count("|") == len(table_style) \
+               and item_len == table_style.count("c")
+
+    @staticmethod
+    def make_table_by_column(*column, hline=True):
+        pass
+
     @staticmethod
     def make_table_by_row(*rows, hline=True):
         max_row_len = 0
@@ -34,20 +42,22 @@ class PyTex:
         tex_code += "\t\\end{tabular}\n\\end{table}"
         print(tex_code)
 
-    @staticmethod
-    def csv_to_tex(file_dir, hline=True):
+    def csv_to_tex(self, file_dir, hline=True, vline=True, table_style=None):
         csv_file = csv.reader(open(file_dir, 'r', encoding='UTF8'))
         data_item = [row for row in csv_file]
         item_len = len(data_item[0])
+        if self.check_table_style(table_style, item_len):
+            pass
+        elif table_style is not None:
+            if vline:
+                table_style = "|".join("c"*item_len)
+            else:
+                table_style = "c"*item_len
         tex_code = "\\begin{}[htbp]\n" \
                    "\t\\centering\n" \
-                   "\t\\begin{}{}\n".format('{table}', '{tabular}', '{'+'c' * item_len+'}')
+                   "\t\\begin{}{}\n".format('{table}', '{tabular}', '{'+table_style+'}')
         for row in data_item:
             tex_code += '\t'
-            # for index in range(0, len(row) - 1):
-            #     tex_code += str(row[index])
-            #     tex_code += '& '
-            # tex_code += str(row[len(row) - 1])
             tex_code += "& ".join(row)
             if hline:
                 tex_code += '\\\\\n\t\\hline\n'
