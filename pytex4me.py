@@ -3,8 +3,8 @@ import csv
 
 
 class PyTexError(Exception):
-    def __init__(self, args: str):
-        Exception.__init__(self, args)
+    def __init__(self, exp_args: str):
+        Exception.__init__(self, exp_args)
 
 
 class PyTex:
@@ -72,7 +72,7 @@ class PyTex:
         if caption is None:
             tex_code += "\t\\end{tabular}\n\t\\%caption{}\n\\end{table}"
         else:
-            tex_code += "\t\\end{tabular}\n" + "\t\\%caption{}\n".format("{" + caption + "}") + "\\end{table}"
+            tex_code += "\t\\end{tabular}\n" + "\t\\caption{}\n".format("{" + caption + "}") + "\\end{table}"
         print(tex_code)
 
     def matrix_to_tex(self, mat, style='b'):
@@ -95,3 +95,34 @@ class PyTex:
                     return self.matrix_to_tex(np_mat, style=style)
                 except TypeError:
                     raise PyTexError('Format not Matrix')
+
+    @staticmethod
+    def pic_insert(file_dir, caption=None, scale=None):
+        tex_code = "\\begin{figure}[htbp]\n\t\\centering\n"
+        if scale is None:
+            tex_code += "\t\\scalebox{1}{\\includegraphics[width=.8\\textwidth]" + "{" + file_dir + "}\n"
+        else:
+            tex_code += "\t\\scalebox{{" + scale + "}}{\\includegraphics[width=.8\\textwidth]{{" + file_dir + "}}}\n"
+        if caption is not None:
+            tex_code += "\t\\caption{}\n".format("{"+caption+"}")
+        else:
+            tex_code += "\t%\\caption{}\n"
+        tex_code += "\\end{figure}"
+        print(tex_code)
+
+
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('file_dir', type=str, help='display an integer')
+    args = parser.parse_args()
+    print(args.file_dir)
+    args.file_dir: str
+    file_name = args.file_dir[args.file_dir.rfind(u"\\") + 1:args.file_dir.rfind(u".")]
+    file_type = args.file_dir[args.file_dir.rfind(u".") + 1:]
+    if file_type == 'csv':
+        tex = PyTex()
+        tex.csv_to_tex(file_dir=args.file_dir, caption=file_name)
+    elif file_type in ['jpg', 'jpeg', 'png', 'JPG', 'PNG', 'JPEG', 'eps']:
+        tex = PyTex()
+        tex.pic_insert(file_dir=args.file_dir, caption=file_name)

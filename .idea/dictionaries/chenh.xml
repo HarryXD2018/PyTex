@@ -3,8 +3,11 @@
     <words>
       <w>hline</w>
       <w>htbp</w>
+      <w>includegraphics</w>
       <w>pmatrix</w>
       <w>pytex</w>
+      <w>scalebox</w>
+      <w>textwidth</w>
       <w>vline</w>
     </words>
   </dictionary>
