@@ -1,4 +1,4 @@
-[中文](https://github.com/HarryXD2018/PyTex/blob/master/README_CN.md)	English
+[中文](https://github.com/HarryXD2018/PyTex/blob/master/README.md)	English
 
 # PyTex
 
