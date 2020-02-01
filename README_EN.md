@@ -1,3 +1,5 @@
+[中文](https://github.com/HarryXD2018/PyTex/blob/master/README_CN.md)	English
+
 # PyTex
 
 ## Features

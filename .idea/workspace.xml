@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="10f60c8d-2802-45c7-930a-a5e862a934c1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Example/example.py" beforeDir="false" afterPath="$PROJECT_DIR$/Example/example.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pytex4me.py" beforeDir="false" afterPath="$PROJECT_DIR$/pytex4me.py" afterDir="false" />
-    </list>
+    <list default="true" id="10f60c8d-2802-45c7-930a-a5e862a934c1" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,11 +20,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pytex4me.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="61" column="53" selection-start-line="61" selection-start-column="53" selection-end-line="61" selection-end-column="53" />
+            <state relative-caret-position="83">
+              <caret line="11" column="12" lean-forward="true" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#265#395#0" />
                 <element signature="e#265#269#0" />
+                <element signature="e#561#1576#0" />
+                <element signature="e#1675#2511#0" />
                 <element signature="e#1946#2786#0" />
               </folding>
             </state>
@@ -58,8 +58,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Example/example.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="297">
+              <caret line="11" column="55" selection-start-line="11" selection-start-column="55" selection-end-line="11" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -91,8 +91,8 @@
         <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/example.py" />
         <option value="$PROJECT_DIR$/Example/example.csv" />
-        <option value="$PROJECT_DIR$/Example/example.py" />
         <option value="$PROJECT_DIR$/pytex4me.py" />
+        <option value="$PROJECT_DIR$/Example/example.py" />
       </list>
     </option>
   </component>
@@ -286,7 +286,7 @@
       <workItem from="1580008278353" duration="9161000" />
       <workItem from="1580183820676" duration="8173000" />
       <workItem from="1580283715208" duration="6821000" />
-      <workItem from="1580546671495" duration="1713000" />
+      <workItem from="1580546671495" duration="2405000" />
     </task>
     <task id="LOCAL-00001" summary="Start Project">
       <created>1580202878804</created>
@@ -320,7 +320,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26813000" />
+    <option name="totallyTimeSpent" value="27505000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -421,18 +421,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Example/example.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        <state relative-caret-position="297">
+          <caret line="11" column="55" selection-start-line="11" selection-start-column="55" selection-end-line="11" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pytex4me.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="61" column="53" selection-start-line="61" selection-start-column="53" selection-end-line="61" selection-end-column="53" />
+        <state relative-caret-position="83">
+          <caret line="11" column="12" lean-forward="true" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#265#395#0" />
             <element signature="e#265#269#0" />
+            <element signature="e#561#1576#0" />
+            <element signature="e#1675#2511#0" />
             <element signature="e#1946#2786#0" />
           </folding>
         </state>
