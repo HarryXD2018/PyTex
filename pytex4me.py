@@ -1,5 +1,6 @@
 import numpy as np
 import csv
+import pyperclip
 
 
 class PyTexError(Exception):
@@ -8,8 +9,8 @@ class PyTexError(Exception):
 
 
 class PyTex:
-    def __init__(self):
-        pass
+    def __init__(self, copy_to_clipboard=False):
+        self.copy_to_clipboard = copy_to_clipboard
 
     def check_table_style(self, table_style: str, item_len):
         if table_style is None:
@@ -48,7 +49,13 @@ class PyTex:
             tex_code += "\t\\end{tabular}\n\t%\\caption{}\n\\end{table}"
         else:
             tex_code += "\t\\end{}\n\t\\caption{}\n\\end{}".format("{tabular}", "{" + caption + "}", "{table}")
-        print(tex_code)
+        if self.copy_to_clipboard:
+            if pyperclip.paste() is not None:
+                print("Warning: The content in clipboard will be replaced")
+            pyperclip.copy(tex_code)
+            print("Code is copied")
+        else:
+            print(tex_code)
 
     def csv_to_tex(self, file_dir, caption=None, hline=True, vline=True, table_style=None):
         csv_file = csv.reader(open(file_dir, 'r', encoding='UTF8'))
@@ -73,7 +80,13 @@ class PyTex:
             tex_code += "\t\\end{tabular}\n\t\\%caption{}\n\\end{table}"
         else:
             tex_code += "\t\\end{tabular}\n" + "\t\\caption{}\n".format("{" + caption + "}") + "\\end{table}"
-        print(tex_code)
+        if self.copy_to_clipboard:
+            if pyperclip.paste() is not None:
+                print("Warning: The content in clipboard will be replaced")
+            pyperclip.copy(tex_code)
+            print("Code is copied")
+        else:
+            print(tex_code)
 
     def matrix_to_tex(self, mat, style='b'):
         if style not in ['p', 'b', 'V', 'v']:
@@ -88,7 +101,13 @@ class PyTex:
                     tex_code = tex_code[:-2]
                     tex_code = tex_code + '\\\\\n'
                 tex_code += "\\end{}\n".format('{' + style + 'matrix}')
-                print(tex_code)
+                if self.copy_to_clipboard:
+                    if pyperclip.paste() is not None:
+                        print("Warning: The content in clipboard will be replaced")
+                    pyperclip.copy(tex_code)
+                    print("Code is copied")
+                else:
+                    print(tex_code)
             else:
                 try:
                     np_mat = np.array(mat)
