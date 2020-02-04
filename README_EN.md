@@ -4,7 +4,7 @@
 
 ## Features
 
-This is a Python package that could generate LaTeX code based on the python object(e.g. List, Numpy Array, CSV table).
+This is a Python package that could generate LaTeX code based on the python object(e.g. List, Numpy Array, CSV table). While using the package in script mode or dragging a csv file or picture in the command mode, the program will generate the Tex code as return. If necessary, the Tex code can be copied automatically. 
 
 ## Setup
 
