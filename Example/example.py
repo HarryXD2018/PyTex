@@ -3,6 +3,9 @@ from pytex4me import *
 if __name__ == '__main__':
     tex = PyTex()
     # This mode will print the result
+    student = {'boy': 'Harry',  'girl': 'Linda'}
+    tex.dic_to_tex(student)
+
     nation = ['US', 'China', 'UK', 'France']
     city = ['New York', 'Shanghai', 'London']
     tex.make_table_by_row(nation, city, vline=False)

@@ -17,9 +17,14 @@ class PyTex:
             return False
         return table_style.count("c") + table_style.count("|") == len(table_style)and item_len == table_style.count("c")
 
-    @staticmethod
-    def make_table_by_column(*column, hline=True):
-        pass
+    def dic_to_tex(self, dic: dict, caption=None, hline=True, vline=True, table_style=None):
+        # Unfinished
+        keys = list(dic.keys())
+        rows = []
+        for key in keys:
+            print([[key], [dic[key]]])
+            rows.append([key, dic[key]])
+        self.make_table_by_row(rows, caption=caption, hline=hline, vline=vline, table_style=table_style)
 
     def make_table_by_row(self, *rows, caption=None, hline=True, vline=True, table_style=None):
         max_row_len = 0
