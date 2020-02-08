@@ -12,19 +12,24 @@ class PyTex:
     def __init__(self, copy_to_clipboard=False):
         self.copy_to_clipboard = copy_to_clipboard
 
+    def transpose(self, lists):
+        transposed_list = []
+        max_index = max(map(len, lists))
+        list_count = len(lists)
+        for i in range(0, max_index):
+            a_line = []
+            for j in range(0, list_count):
+                try:
+                    a_line.append(lists[j][i])
+                except IndexError:
+                    a_line.append(" ")
+            transposed_list.append(a_line)
+        return transposed_list
+
     def check_table_style(self, table_style: str, item_len):
         if table_style is None:
             return False
         return table_style.count("c") + table_style.count("|") == len(table_style)and item_len == table_style.count("c")
-
-    def dic_to_tex(self, dic: dict, caption=None, hline=True, vline=True, table_style=None):
-        # Unfinished
-        keys = list(dic.keys())
-        rows = []
-        for key in keys:
-            print([[key], [dic[key]]])
-            rows.append([key, dic[key]])
-        self.make_table_by_row(rows, caption=caption, hline=hline, vline=vline, table_style=table_style)
 
     def make_table_by_row(self, *rows, caption=None, hline=True, vline=True, table_style=None):
         max_row_len = 0
@@ -54,6 +59,36 @@ class PyTex:
             tex_code += "\t\\end{tabular}\n\t%\\caption{}\n\\end{table}"
         else:
             tex_code += "\t\\end{}\n\t\\caption{}\n\\end{}".format("{tabular}", "{" + caption + "}", "{table}")
+        if self.copy_to_clipboard:
+            if pyperclip.paste() is not None:
+                print("Warning: The content in clipboard will be replaced")
+            pyperclip.copy(tex_code)
+            print("Code is copied")
+        else:
+            print(tex_code)
+
+    def make_table_by_column(self, *columns, caption=None, hline=True, vline=True, table_style=None):
+        data_item = self.transpose(columns)
+        item_len = len(data_item[0])
+        if not self.check_table_style(table_style, item_len):
+            if vline:
+                table_style = "|".join("c" * item_len)
+            else:
+                table_style = "c" * item_len
+        tex_code = "\\begin{}[htbp]\n" \
+                   "\t\\centering\n" \
+                   "\t\\begin{}{}\n".format('{table}', '{tabular}', '{' + table_style + '}')
+        for row in data_item:
+            tex_code += '\t'
+            tex_code += "& ".join(row)
+            if hline:
+                tex_code += '\\\\\n\t\\hline\n'
+            else:
+                tex_code += '\\\\\n'
+        if caption is None:
+            tex_code += "\t\\end{tabular}\n\t\\%caption{}\n\\end{table}"
+        else:
+            tex_code += "\t\\end{tabular}\n" + "\t\\caption{}\n".format("{" + caption + "}") + "\\end{table}"
         if self.copy_to_clipboard:
             if pyperclip.paste() is not None:
                 print("Warning: The content in clipboard will be replaced")
