@@ -12,6 +12,7 @@ class PyTex:
     def __init__(self, copy_to_clipboard=False):
         self.copy_to_clipboard = copy_to_clipboard
 
+
     def transpose(self, lists):
         transposed_list = []
         max_index = max(map(len, lists))
@@ -30,6 +31,43 @@ class PyTex:
         if table_style is None:
             return False
         return table_style.count("c") + table_style.count("|") == len(table_style)and item_len == table_style.count("c")
+
+    def row_tex(self, array, caption=None, hline=True, vline=True, table_style=None):
+        try:
+            array[0][0]
+        except IndexError:
+            raise PyTexError("Not 2D Array")
+        max_item = max(map(len, array))
+        if not self.check_table_style(table_style, max_item):
+            if vline:
+                table_style = "|".join("c" * max_item)
+            else:
+                table_style = "c" * max_item
+        tex_code = "\\begin{}[htbp]\n" \
+                   "\t\\centering\n" \
+                   "\t\\begin{}{}\n".format('{table}', '{tabular}', '{' + table_style + '}')
+        for item in array:
+            tex_code += '\t'
+            for index in range(0, max_item):
+                try:
+                    tex_code += "{}& ".format(str(item[index]))
+                except IndexError:
+                    tex_code += "& "
+            tex_code = tex_code[:-2]
+            tex_code += "\\\\\n"
+            if hline:
+                tex_code += "\t\\hline\n"
+        if caption is None:
+            tex_code += "\t\\end{tabular}\n\t%\\caption{}\n\\end{table}"
+        else:
+            tex_code += "\t\\end{}\n\t\\caption{}\n\\end{}".format("{tabular}", "{" + caption + "}", "{table}")
+        if self.copy_to_clipboard:
+            if pyperclip.paste() is not None:
+                print("Warning: The content in clipboard will be replaced")
+            pyperclip.copy(tex_code)
+            print("Code is copied")
+        else:
+            print(tex_code)
 
     def make_table_by_row(self, *rows, caption=None, hline=True, vline=True, table_style=None):
         max_row_len = 0
