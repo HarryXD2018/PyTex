@@ -112,9 +112,9 @@ class PyTex:
     def pic_insert(file_dir, caption=None, scale=None):
         tex_code = "\\begin{figure}[htbp]\n\t\\centering\n"
         if scale is None:
-            tex_code += "\t\\scalebox{1}{\\includegraphics[width=.8\\textwidth]" + "{" + file_dir + "}\n"
+            tex_code += "\t\\scalebox{1}{\\includegraphics[width=.8\\textwidth]" + "{" + caption + "}}\n"
         else:
-            tex_code += "\t\\scalebox{{" + scale + "}}{\\includegraphics[width=.8\\textwidth]{{" + file_dir + "}}}\n"
+            tex_code += "\t\\scalebox{{" + scale + "}}{\\includegraphics[width=.8\\textwidth]{{" + caption + "}}}\n"
         if caption is not None:
             tex_code += "\t\\caption{}\n".format("{"+caption+"}")
         else:
