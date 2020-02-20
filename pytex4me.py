@@ -45,6 +45,8 @@ class PyTex:
         tex_code = "\\begin{}[htbp]\n" \
                    "\t\\centering\n" \
                    "\t\\begin{}{}\n".format('{table}', '{tabular}', '{' + table_style + '}')
+        if hline:
+            tex_code += '\t\\hline\n'
         for item in array:
             tex_code += '\t'
             for index in range(0, max_item):
@@ -109,17 +111,18 @@ class PyTex:
                     raise PyTexError('Format not Matrix')
 
     @staticmethod
-    def pic_insert(file_dir, caption=None, scale=None):
+    def pic_insert(file_name, caption=None, scale=None):
         tex_code = "\\begin{figure}[htbp]\n\t\\centering\n"
         if scale is None:
             tex_code += "\t\\scalebox{1}{\\includegraphics[width=.8\\textwidth]" + "{" + caption + "}}\n"
         else:
-            tex_code += "\t\\scalebox{{" + scale + "}}{\\includegraphics[width=.8\\textwidth]{{" + caption + "}}}\n"
+            tex_code += "\t\\scalebox{{" + scale + "}}{\\includegraphics[width=.8\\textwidth]{{" + file_name + "}}}\n"
         if caption is not None:
             tex_code += "\t\\caption{}\n".format("{"+caption+"}")
         else:
             tex_code += "\t%\\caption{}\n"
-        tex_code += "\\end{figure}"
+        tex_code += "\\end{figure}\n"
+        tex_code += "% the picture file should add to the path or in the same folder"
         print(tex_code)
 
 
@@ -137,4 +140,4 @@ if __name__ == '__main__':
         tex.csv_to_tex(file_dir=args.file_dir, caption=file_name)
     elif file_type in ['jpg', 'jpeg', 'png', 'JPG', 'PNG', 'JPEG', 'eps']:
         tex = PyTex()
-        tex.pic_insert(file_dir=args.file_dir, caption=file_name)
+        tex.pic_insert(file_name=file_name+'.'+file_type, caption=file_name)
