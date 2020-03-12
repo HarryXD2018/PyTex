@@ -4,7 +4,7 @@
 
 ## 特征
 
-这是一个可以将Python中的列表、Numpy类型的二元数组，CSV表格文件转化为Latex代码的Python第三方库。您可以将此第三方库作为脚本运行，或是在命令提示行中将CSV文件或是图片文件拖拽至其中运行，即可得到对应的Tex代码。在脚本运行中，如果有需要，可以将生产的内容复制到剪切板中。
+这是一个可以将Python中的列表、Numpy类型的二元数组，CSV表格文件或是代码转化为Latex代码的Python第三方库。您可以将此第三方库作为脚本运行，或是在命令提示行中将CSV文件或是图片文件拖拽至其中运行，即可得到对应的Tex代码。在脚本运行中，如果有需要，可以将生产的内容复制到剪切板中。
 
 ## 安装
 
@@ -34,7 +34,8 @@ make_table_by_row(*rows, hline=True, vline=True, table_style=None)
 
 根据提交的可变长度的参数`rows`制表，**注意**：在函数中的参数`hline`, `vline`和`table_style`若要定义，需要明确声明。
 
-
+## 参考
+Latex插入代码 https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
 
 ## 实例
 
