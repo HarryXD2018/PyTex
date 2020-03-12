@@ -4,6 +4,7 @@
       <w>hline</w>
       <w>htbp</w>
       <w>includegraphics</w>
+      <w>lstinputlisting</w>
       <w>pmatrix</w>
       <w>pytex</w>
       <w>scalebox</w>

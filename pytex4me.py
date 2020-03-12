@@ -1,6 +1,7 @@
 import numpy as np
 import csv
 import pyperclip
+import warnings
 
 
 class PyTexError(Exception):
@@ -64,7 +65,7 @@ class PyTex:
             tex_code += "\t\\end{}\n\t\\caption{}\n\\end{}".format("{tabular}", "{" + caption + "}", "{table}")
         if self.copy_to_clipboard:
             if pyperclip.paste() is not None:
-                print("Warning: The content in clipboard will be replaced")
+                warnings.warn("The content in clipboard will be replaced")
             pyperclip.copy(tex_code)
             print("Code is copied")
         else:
@@ -98,7 +99,7 @@ class PyTex:
                 tex_code += "\\end{}\n".format('{' + style + 'matrix}')
                 if self.copy_to_clipboard:
                     if pyperclip.paste() is not None:
-                        print("Warning: The content in clipboard will be replaced")
+                        warnings.warn("The content in clipboard will be replaced")
                     pyperclip.copy(tex_code)
                     print("Code is copied")
                 else:
@@ -110,13 +111,35 @@ class PyTex:
                 except TypeError:
                     raise PyTexError('Format not Matrix')
 
+    def code_insert(self, f_name:str, language="Python", high_light=False):
+        text = r"\lstinputlisting[language={}]".format(language) + "{" + f_name + "}\n"
+        if high_light:
+            warnings.warn("High light parameter is in need")
+            content = "\lstset{numbers=left, \n" \
+                      "%设置行号位置numberstyle=\\tiny, \n" \
+                      "%设置行号大小keywordstyle=\color{blue}, \n" \
+                      "%设置关键字颜色commentstyle=\color[cmyk]{1,0,1,0}, \n" \
+                      "%设置注释颜色%frame=single, \n" \
+                      "%设置边框格式escapeinside=``,\n" \
+                      " %逃逸字符(1左面的键)，用于显示中文%breaklines, \n" \
+                      "%自动折行extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题,\n" \
+                      "xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距 \n" \
+                      "tabsize=4, %设置tab空格数\n" \
+                      "showspaces=false %不显示空格}"
+            print(content)
+        warnings.warn(r"\usepackage{listings} is in need in LaTeX")
+        if self.copy_to_clipboard:
+            pyperclip.copy(text)
+        else:
+            print(text)
+
     @staticmethod
-    def pic_insert(file_name, caption=None, scale=None):
+    def pic_insert(f_name, caption=None, scale=None):
         tex_code = "\\begin{figure}[htbp]\n\t\\centering\n"
         if scale is None:
             tex_code += "\t\\scalebox{1}{\\includegraphics[width=.8\\textwidth]" + "{" + caption + "}}\n"
         else:
-            tex_code += "\t\\scalebox{{" + scale + "}}{\\includegraphics[width=.8\\textwidth]{{" + file_name + "}}}\n"
+            tex_code += "\t\\scalebox{{" + scale + "}}{\\includegraphics[width=.8\\textwidth]{{" + f_name + "}}}\n"
         if caption is not None:
             tex_code += "\t\\caption{}\n".format("{"+caption+"}")
         else:
@@ -140,4 +163,4 @@ if __name__ == '__main__':
         tex.csv_to_tex(file_dir=args.file_dir, caption=file_name)
     elif file_type in ['jpg', 'jpeg', 'png', 'JPG', 'PNG', 'JPEG', 'eps']:
         tex = PyTex()
-        tex.pic_insert(file_name=file_name+'.'+file_type, caption=file_name)
+        tex.pic_insert(f_name=file_name + '.' + file_type, caption=file_name)
