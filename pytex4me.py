@@ -115,14 +115,14 @@ class PyTex:
         text = r"\lstinputlisting[language={}]".format(language) + "{" + f_name + "}\n"
         if high_light:
             warnings.warn("High light parameter is in need")
-            content = "\lstset{numbers=left, \n" \
-                      "%设置行号位置numberstyle=\\tiny, \n" \
-                      "%设置行号大小keywordstyle=\color{blue}, \n" \
-                      "%设置关键字颜色commentstyle=\color[cmyk]{1,0,1,0}, \n" \
-                      "%设置注释颜色%frame=single, \n" \
-                      "%设置边框格式escapeinside=``,\n" \
-                      " %逃逸字符(1左面的键)，用于显示中文%breaklines, \n" \
-                      "%自动折行extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题,\n" \
+            content = "\lstset{numbers=left, %设置行号位置\n" \
+                      "numberstyle=\\tiny, %设置行号大小\n" \
+                      "keywordstyle=\color{blue}, %设置关键字颜色\n" \
+                      "commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色\n" \
+                      "%frame=single, %设置边框格式\n" \
+                      "escapeinside=``, %逃逸字符(1左面的键)，用于显示中文\n" \
+                      "%breaklines, %自动折行\n" \
+                      "extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题,\n" \
                       "xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距 \n" \
                       "tabsize=4, %设置tab空格数\n" \
                       "showspaces=false %不显示空格}"
