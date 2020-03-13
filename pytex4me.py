@@ -111,8 +111,17 @@ class PyTex:
                 except TypeError:
                     raise PyTexError('Format not Matrix')
 
-    def code_insert(self, f_name:str, language="Python", high_light=False):
-        text = r"\lstinputlisting[language={}]".format(language) + "{" + f_name + "}\n"
+    def code_insert(self, f_name: str, language, high_light=False):
+        with open("valid_language.txt", "r", encoding="UTF8") as file:
+            for line in file:
+                if language in line or language in line.lower():
+                    print(line, line.lower())
+                    language = line
+                    break
+            else:
+                warnings.warn("Language {} invalid, replaced with C".format(language))
+                language = "C"
+        text = r"\lstinputlisting[language={}]".format(language.strip('\n')) + "{" + f_name + "}\n"
         if high_light:
             warnings.warn("High light parameter is in need")
             content = "\lstset{numbers=left, %设置行号位置\n" \
@@ -158,9 +167,10 @@ if __name__ == '__main__':
     args.file_dir: str
     file_name = args.file_dir[args.file_dir.rfind(u"\\") + 1:args.file_dir.rfind(u".")]
     file_type = args.file_dir[args.file_dir.rfind(u".") + 1:]
+    tex = PyTex()
     if file_type == 'csv':
-        tex = PyTex()
         tex.csv_to_tex(file_dir=args.file_dir, caption=file_name)
     elif file_type in ['jpg', 'jpeg', 'png', 'JPG', 'PNG', 'JPEG', 'eps']:
-        tex = PyTex()
         tex.pic_insert(f_name=file_name + '.' + file_type, caption=file_name)
+    else:
+        tex.code_insert(f_name=file_name+'.'+file_type, language=file_type)
