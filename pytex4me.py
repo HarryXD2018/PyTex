@@ -112,7 +112,7 @@ class PyTex:
                     raise PyTexError('Format not Matrix')
 
     def code_insert(self, f_name: str, language, high_light=False):
-        with open("valid_language.txt", "r", encoding="UTF8") as file:
+        with open(r"\files\valid_language.txt", "r", encoding="UTF8") as file:
             for line in file:
                 if language in line or language in line.lower():
                     print(line, line.lower())
