@@ -112,10 +112,9 @@ class PyTex:
                     raise PyTexError('Format not Matrix')
 
     def code_insert(self, f_name: str, language, high_light=False):
-        with open(r"\files\valid_language.txt", "r", encoding="UTF8") as file:
+        with open(r".\files\valid_language.txt", "r", encoding="UTF8") as file:
             for line in file:
                 if language in line or language in line.lower():
-                    print(line, line.lower())
                     language = line
                     break
             else:
@@ -124,21 +123,15 @@ class PyTex:
         text = r"\lstinputlisting[language={}]".format(language.strip('\n')) + "{" + f_name + "}\n"
         if high_light:
             warnings.warn("High light parameter is in need")
-            content = "\lstset{numbers=left, %设置行号位置\n" \
-                      "numberstyle=\\tiny, %设置行号大小\n" \
-                      "keywordstyle=\color{blue}, %设置关键字颜色\n" \
-                      "commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色\n" \
-                      "%frame=single, %设置边框格式\n" \
-                      "escapeinside=``, %逃逸字符(1左面的键)，用于显示中文\n" \
-                      "%breaklines, %自动折行\n" \
-                      "extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题,\n" \
-                      "xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距 \n" \
-                      "tabsize=4, %设置tab空格数\n" \
-                      "showspaces=false %不显示空格}"
-            print(content)
+            with open(r".\files\highlight.txt", "r", encoding="UTF8") as hl_content:
+                for line in hl_content:
+                    print(line, end='')
         warnings.warn(r"\usepackage{listings} is in need in LaTeX")
         if self.copy_to_clipboard:
+            if pyperclip.paste() is not None:
+                warnings.warn("The content in clipboard will be replaced")
             pyperclip.copy(text)
+            print("Code is copied")
         else:
             print(text)
 
@@ -173,4 +166,4 @@ if __name__ == '__main__':
     elif file_type in ['jpg', 'jpeg', 'png', 'JPG', 'PNG', 'JPEG', 'eps']:
         tex.pic_insert(f_name=file_name + '.' + file_type, caption=file_name)
     else:
-        tex.code_insert(f_name=file_name+'.'+file_type, language=file_type)
+        tex.code_insert(f_name=file_name+'.'+file_type, language=file_type, high_light=True)
