@@ -32,7 +32,7 @@ class PyTex:
             return False
         return table_style.count("c") + table_style.count("|") == len(table_style)and item_len == table_style.count("c")
 
-    def row_tex(self, array, caption=None, hline=True, vline=True, table_style=None):
+    def raw_tex(self, array, caption=None, hline=True, vline=True, table_style=None):
         try:
             array[0][0]
         except IndexError:
@@ -73,16 +73,16 @@ class PyTex:
 
     def make_table_by_row(self, *rows, caption=None, hline=True, vline=True, table_style=None):
         data = [row for row in rows]
-        self.row_tex(data, caption, hline, vline, table_style)
+        self.raw_tex(data, caption, hline, vline, table_style)
 
     def make_table_by_column(self, *columns, caption=None, hline=True, vline=True, table_style=None):
         data = self.transpose(columns)
-        self.row_tex(data, caption, hline, vline, table_style)
+        self.raw_tex(data, caption, hline, vline, table_style)
 
     def csv_to_tex(self, file_dir, caption=None, hline=True, vline=True, table_style=None):
         csv_file = csv.reader(open(file_dir, 'r', encoding='UTF8'))
         data_item = [row for row in csv_file]
-        self.row_tex(data_item, caption, hline, vline, table_style)
+        self.raw_tex(data_item, caption, hline, vline, table_style)
 
     def matrix_to_tex(self, mat, style='b'):
         if style not in ['p', 'b', 'V', 'v']:

@@ -5,7 +5,7 @@ if __name__ == '__main__':
     # This mode will print the result
 
     # table = [['Team1', 'Tom', 'Jack'], ['Team2', 'Lucy', 'Anne'], ['Team3', 'Joe']]
-    # tex.row_tex(table)
+    # tex.raw_tex(table)
 
     # nation = ['US', 'China', 'UK', 'France']
     # city = ['New York', 'Shanghai', 'London']
