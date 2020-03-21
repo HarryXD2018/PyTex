@@ -46,6 +46,8 @@ tex = PyTex()
 csv_file = "example.csv"
 tex.csv_to_tex(csv_file)
 """
+Output:
+
 \begin{table}[htbp]
 	\centering
 	\begin{tabular}{c|c|c|c|c}
@@ -62,6 +64,8 @@ tex.csv_to_tex(csv_file)
 matrix = [[0, 1], [1, 0]]
 tex.matrix_to_tex(matrix, 'p')
 """
+Output:
+
 \begin{pmatrix}
 	0& 1\\
 	1& 0\\
@@ -72,6 +76,8 @@ nation = ['US', 'China', 'UK', 'France']
 city = ['New York', 'Shanghai', 'London']
 tex.make_table_by_row(nation, city)
 """
+Output:
+
 \begin{table}[htbp]
 	\centering
 	\begin{tabular}{c|c|c|c}
@@ -84,3 +90,4 @@ tex.make_table_by_row(nation, city)
 """
 ~~~
 
+更多具体操作请参考`Example`
