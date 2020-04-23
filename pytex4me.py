@@ -3,6 +3,7 @@ import csv
 import pyperclip
 import warnings
 import pandas as pd
+import os
 
 
 class PyTexError(Exception):
@@ -121,7 +122,7 @@ class PyTex:
                     raise PyTexError('Format not Matrix')
 
     def code_insert(self, f_name: str, language, high_light=False):
-        with open(r".\files\valid_language.txt", "r", encoding="UTF8") as file:
+        with open(os.path.abspath('..')+r"\files\valid_language.txt", "r", encoding="UTF8") as file:
             for line in file:
                 if language in line or language in line.lower():
                     language = line
@@ -132,7 +133,7 @@ class PyTex:
         text = r"\lstinputlisting[language={}]".format(language.strip('\n')) + "{" + f_name + "}\n"
         if high_light:
             warnings.warn("High light parameter is in need")
-            with open(r".\files\highlight.txt", "r", encoding="UTF8") as hl_content:
+            with open(os.path.abspath('..')+r"\files\highlight.txt", "r", encoding="UTF8") as hl_content:
                 for line in hl_content:
                     print(line, end='')
         warnings.warn(r"\usepackage{listings} is in need in LaTeX")
