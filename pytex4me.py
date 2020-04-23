@@ -2,6 +2,7 @@ import numpy as np
 import csv
 import pyperclip
 import warnings
+import pandas as pd
 
 
 class PyTexError(Exception):
@@ -33,10 +34,17 @@ class PyTex:
         return table_style.count("c") + table_style.count("|") == len(table_style)and item_len == table_style.count("c")
 
     def raw_tex(self, array, caption=None, hline=True, vline=True, table_style=None):
-        try:
-            array[0][0]
-        except IndexError:
-            raise PyTexError("Not 2D Array")
+        if isinstance(array, pd.core.frame.DataFrame):
+            # array is instance of DataFrame
+            df = [[column for column in array]] # the first line is name of each column
+            for i in range(0, len(array)):
+                df.append(list(array.iloc[i]))
+            array = df
+        else:
+            try:
+                array[0][0]
+            except IndexError:
+                raise PyTexError("Not 2D Array")
         max_item = max(map(len, array))
         if not self.check_table_style(table_style, max_item):
             if vline:
@@ -84,6 +92,7 @@ class PyTex:
         data_item = [row for row in csv_file]
         self.raw_tex(data_item, caption, hline, vline, table_style)
 
+    # Does Not Change
     def matrix_to_tex(self, mat, style='b'):
         if style not in ['p', 'b', 'V', 'v']:
             raise PyTexError('Style Invalid', )
